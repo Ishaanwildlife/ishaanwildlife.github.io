@@ -15,7 +15,28 @@
     font-family:'Segoe UI', sans-serif;
 }
 
-/* VIDEO BACKGROUND */
+/* LOADER */
+.loader{
+    position:fixed;
+    width:100%;
+    height:100%;
+    background:black;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    color:white;
+    font-size:30px;
+    letter-spacing:5px;
+    z-index:9999;
+    animation:fadeOut 2s forwards;
+    animation-delay:2s;
+}
+
+@keyframes fadeOut{
+    to{opacity:0; visibility:hidden;}
+}
+
+/* VIDEO */
 #bg-video{
     position:fixed;
     top:0;
@@ -24,39 +45,33 @@
     height:100%;
     object-fit:cover;
     z-index:-2;
-    filter:brightness(0.7);
+    opacity:0;
+    animation:videoFade 3s forwards;
+    animation-delay:2s;
+}
+
+@keyframes videoFade{
+    to{opacity:1;}
 }
 
 /* OVERLAY */
 .overlay{
     position:fixed;
-    top:0;
-    left:0;
     width:100%;
     height:100%;
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.85),
-        rgba(0,0,0,0.4),
-        rgba(0,0,0,0.95)
-    );
+    background:rgba(0,0,0,0.6);
     z-index:-1;
 }
 
-/* NAVBAR */
+/* NAV */
 nav{
     position:fixed;
     width:100%;
     padding:20px 50px;
     display:flex;
     justify-content:space-between;
-    align-items:center;
     color:white;
     z-index:10;
-}
-
-nav h1{
-    letter-spacing:3px;
 }
 
 nav ul{
@@ -67,11 +82,6 @@ nav ul{
 
 nav ul li{
     cursor:pointer;
-    transition:0.3s;
-}
-
-nav ul li:hover{
-    color:#ffcc00;
 }
 
 /* HERO */
@@ -81,15 +91,14 @@ nav ul li:hover{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    text-align:center;
     color:white;
-    animation:fadeIn 2s ease;
+    text-align:center;
 }
 
 .hero h2{
-    font-size:60px;
-    letter-spacing:5px;
-    text-shadow:0 0 20px rgba(255,255,255,0.4);
+    font-size:70px;
+    letter-spacing:6px;
+    animation:slideUp 2s ease;
 }
 
 .hero p{
@@ -97,13 +106,18 @@ nav ul li:hover{
     opacity:0.8;
 }
 
+@keyframes slideUp{
+    from{transform:translateY(50px); opacity:0;}
+    to{transform:translateY(0); opacity:1;}
+}
+
+/* BUTTON */
 .hero button{
-    margin-top:25px;
+    margin-top:30px;
     padding:12px 30px;
-    border:none;
     background:#ffcc00;
+    border:none;
     cursor:pointer;
-    font-weight:bold;
     transition:0.3s;
 }
 
@@ -126,7 +140,7 @@ nav ul li:hover{
 }
 
 .gallery img:hover{
-    transform:scale(1.08);
+    transform:scale(1.1);
 }
 
 /* ABOUT */
@@ -136,23 +150,9 @@ nav ul li:hover{
     color:white;
 }
 
-.about h2{
-    font-size:40px;
-    margin-bottom:20px;
-}
-
 .about p{
     max-width:700px;
     margin:auto;
-    line-height:1.7;
-    font-size:18px;
-    opacity:0.9;
-}
-
-/* ANIMATION */
-@keyframes fadeIn{
-    from{opacity:0; transform:translateY(30px);}
-    to{opacity:1; transform:translateY(0);}
 }
 
 </style>
@@ -160,65 +160,69 @@ nav ul li:hover{
 
 <body>
 
-<!-- 🎥 VIDEO BACKGROUND (CORRECT PLACE) -->
-<video autoplay muted loop playsinline preload="none" id="bg-video">
+<!-- 🔥 LOADER -->
+<div class="loader">ISHAAN</div>
+
+<!-- 🎥 VIDEO -->
+<video autoplay muted loop playsinline id="bg-video">
     <source src="wildlife.mp4" type="video/mp4">
 </video>
 
-<!-- 🌑 OVERLAY -->
 <div class="overlay"></div>
 
-<!-- NAVBAR -->
+<!-- NAV -->
 <nav>
     <h1>ISHAAN</h1>
     <ul>
-        <li onclick="scrollToSection('home')">Home</li>
         <li onclick="scrollToSection('gallery')">Gallery</li>
         <li onclick="scrollToSection('about')">About</li>
     </ul>
 </nav>
 
 <!-- HERO -->
-<section class="hero" id="home">
+<section class="hero">
     <h2>WILDLIFE</h2>
-    <p>Capturing Nature Through My Lens</p>
-    <button onclick="scrollToSection('gallery')">Explore</button>
+    <p>Capture. Explore. Inspire.</p>
+    <button onclick="playSound(); scrollToSection('gallery')">Enter</button>
 </section>
 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
-    <img src="DSC_0016.JPG" loading="lazy">
-    <img src="DSC_0038.JPG" loading="lazy">
-    <img src="DSC_1458.JPG" loading="lazy">
-    <img src="DSC_5775.JPG" loading="lazy">
-    <img src="ISH_0300.JPG" loading="lazy">
-    <img src="ISH_0830.JPG" loading="lazy">
+    <img src="DSC_0016.JPG">
+    <img src="DSC_0038.JPG">
+    <img src="DSC_1458.JPG">
+    <img src="DSC_5775.JPG">
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
     <h2>About Me</h2>
-    <p>
-        I am Ishaan, a wildlife photographer driven by passion and curiosity for the natural world. 
-        Through my lens, I capture moments that often go unnoticed — the silent flight of birds, 
-        the intensity of survival, and the raw beauty of nature.
-    </p>
+    <p>I am Ishaan, capturing the wild through my lens.</p>
 </section>
+
+<!-- 🔊 SOUND -->
+<audio id="clickSound">
+    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
+</audio>
 
 <!-- JS -->
 <script>
+
 function scrollToSection(id){
     document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
 
+/* SOUND */
+function playSound(){
+    document.getElementById("clickSound").play();
+}
+
 /* AUTOPLAY FIX */
 const video = document.getElementById("bg-video");
-
 video.play().catch(() => {
-    document.body.addEventListener("click", () => {
-        video.play();
-    });
+    document.body.addEventListener("click", () => video.play());
 });
+
 </script>
 
 </body>
