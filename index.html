@@ -1,256 +1,184 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Ishaan S Kumavat | Wildlife Photography</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ishaan Wildlife</title>
 
-    <style>
-        body {
-            margin: 0;
-            font-family: 'Segoe UI', sans-serif;
-            background: #000;
-            color: white;
-            overflow-x: hidden;
-        }
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Montserrat:wght@300&display=swap" rel="stylesheet">
 
-        /* HERO */
-        .hero {
-            height: 100vh;
-            background: url('DSC_5775.JPG') center/cover;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            text-align: center;
-            position: relative;
-        }
+<style>
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
 
-        .hero::after {
-            content: "";
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.6);
-        }
+body {
+  background: black;
+  color: white;
+  font-family: 'Montserrat', sans-serif;
+  overflow-x: hidden;
+}
 
-        .hero h1 {
-            position: relative;
-            font-size: 60px;
-            animation: fadeUp 2s ease;
-        }
+/* HERO SECTION */
+.hero {
+  height: 100vh;
+  background: url('DSC_1458.JPG') center/cover no-repeat;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
 
-        @keyframes fadeUp {
-            from {opacity:0; transform: translateY(40px);}
-            to {opacity:1; transform: translateY(0);}
-        }
+.hero h1 {
+  font-size: 4rem;
+  font-family: 'Playfair Display', serif;
+  letter-spacing: 3px;
+  animation: fadeIn 2s ease-in-out;
+}
 
-        nav {
-            position: fixed;
-            width: 100%;
-            top: 0;
-            background: rgba(0,0,0,0.5);
-            backdrop-filter: blur(10px);
-            text-align: center;
-            padding: 10px;
-            z-index: 1000;
-        }
+.hero p {
+  margin-top: 10px;
+  font-size: 1.2rem;
+  opacity: 0.8;
+}
 
-        nav a {
-            color: white;
-            margin: 15px;
-            text-decoration: none;
-            font-weight: bold;
-        }
+@keyframes fadeIn {
+  from {opacity: 0; transform: translateY(40px);}
+  to {opacity: 1; transform: translateY(0);}
+}
 
-        section {
-            padding: 80px 20px;
-            text-align: center;
-        }
+/* SECTION TITLE */
+.section-title {
+  text-align: center;
+  margin: 60px 0 20px;
+  font-size: 2rem;
+  letter-spacing: 2px;
+}
 
-        /* PROFILE */
-        .profile {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 40px;
-            flex-wrap: wrap;
-        }
+/* GALLERY */
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 10px;
+  padding: 20px;
+}
 
-        .profile img {
-            width: 260px;
-            border-radius: 50%;
-            box-shadow: 0 0 25px rgba(255,255,255,0.3);
-        }
+.gallery img {
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: 0.5s;
+}
 
-        /* SLIDER */
-        .slider {
-            position: relative;
-            max-width: 900px;
-            margin: auto;
-        }
+.gallery img:hover {
+  transform: scale(1.1);
+  filter: brightness(1.2);
+}
 
-        .slides img {
-            width: 100%;
-            border-radius: 15px;
-        }
+/* LIGHTBOX */
+.lightbox {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.95);
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
 
-        .controls button {
-            margin: 10px;
-            padding: 10px 20px;
-            cursor: pointer;
-            background: #00ffcc;
-            border: none;
-            border-radius: 5px;
-        }
+.lightbox img {
+  max-width: 90%;
+  max-height: 90%;
+}
 
-        /* GALLERY */
-        .gallery {
-            column-count: 3;
-            column-gap: 10px;
-        }
+.lightbox.active {
+  display: flex;
+}
 
-        .gallery img {
-            width: 100%;
-            margin-bottom: 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+/* ABOUT */
+.about {
+  padding: 50px;
+  text-align: center;
+  max-width: 800px;
+  margin: auto;
+  line-height: 1.8;
+}
 
-        .gallery img:hover {
-            transform: scale(1.05);
-        }
-
-        /* LIGHTBOX */
-        .lightbox {
-            display: none;
-            position: fixed;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            justify-content: center;
-            align-items: center;
-        }
-
-        .lightbox img {
-            max-width: 90%;
-            max-height: 85%;
-        }
-
-        footer {
-            padding: 20px;
-            text-align: center;
-            background: #000;
-        }
-
-        @media(max-width:800px){
-            .gallery { column-count:2; }
-        }
-
-        @media(max-width:500px){
-            .gallery { column-count:1; }
-        }
-    </style>
+/* FOOTER */
+footer {
+  text-align: center;
+  padding: 20px;
+  opacity: 0.6;
+}
+</style>
 </head>
 
 <body>
 
-<nav>
-    <a href="#about">About</a>
-    <a href="#slider">Highlights</a>
-    <a href="#gallery">Gallery</a>
-</nav>
-
 <!-- HERO -->
-<div class="hero">
-    <h1>Ishaan S Kumavat<br>Wildlife Photographer</h1>
-</div>
-
-<!-- ABOUT -->
-<section id="about">
-    <h2>The Photographer</h2>
-
-    <div class="profile">
-        <img src="DSCN1948.JPG">
-
-        <p>
-            Hi, I am Ishaan S Kumavat, a wildlife photographer passionate about capturing
-            nature in its most raw and beautiful form. My work focuses on birds,
-            behavior, and moments that tell powerful stories of the wild.
-        </p>
-    </div>
-</section>
-
-<!-- SLIDER -->
-<section id="slider">
-    <h2>Highlights</h2>
-
-    <div class="slider">
-        <div class="slides">
-            <img id="slide" src="DSC_0038.JPG">
-        </div>
-
-        <div class="controls">
-            <button onclick="prev()">⬅</button>
-            <button onclick="next()">➡</button>
-        </div>
-    </div>
+<section class="hero">
+  <div>
+    <h1>Ishaan Wildlife</h1>
+    <p>Capturing Nature • Telling Stories</p>
+  </div>
 </section>
 
 <!-- GALLERY -->
-<section id="gallery">
-    <h2>Gallery</h2>
+<h2 class="section-title">My Work</h2>
 
-    <div class="gallery">
-        <img src="DSC_0038.JPG" onclick="openImg(this.src)">
-        <img src="DSC_0016.JPG" onclick="openImg(this.src)">
-        <img src="DSC_1458.JPG" onclick="openImg(this.src)">
-        <img src="DSC_5939.JPG" onclick="openImg(this.src)">
-        <img src="DSC_6136.JPG" onclick="openImg(this.src)">
-        <img src="DSC_6292.JPG" onclick="openImg(this.src)">
-        <img src="ISH_0300.JPG" onclick="openImg(this.src)">
-        <img src="ISH_0830.JPG" onclick="openImg(this.src)">
-        <img src="DSCN1958.JPG" onclick="openImg(this.src)">
-        <img src="logo.jpg" onclick="openImg(this.src)">
-    </div>
-</section>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox" onclick="closeImg()">
-    <img id="lightbox-img">
+<div class="gallery">
+  <img src="DSCN1948.JPG">
+  <img src="DSC_0016.JPG">
+  <img src="DSC_0038.JPG">
+  <img src="DSC_1458.JPG">
+  <img src="DSC_5775.JPG">
+  <img src="DSC_5939.JPG">
+  <img src="DSC_6136.JPG">
+  <img src="DSC_6292.JPG">
+  <img src="ISH_0300.JPG">
+  <img src="ISH_0830.JPG">
 </div>
 
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox">
+  <img id="lightbox-img">
+</div>
+
+<!-- ABOUT -->
+<section class="about">
+  <h2 class="section-title">About Me</h2>
+  <p>
+    I am Ishaan, a wildlife photographer passionate about capturing nature’s raw beauty. 
+    From silent wetlands to vibrant birdlife, my goal is to tell powerful stories through my lens.
+    Every photograph is a moment of patience, passion, and precision.
+  </p>
+</section>
+
+<!-- FOOTER -->
 <footer>
-    © 2026 Ishaan S Kumavat
+  © 2026 Ishaan Wildlife
 </footer>
 
 <script>
-const slides = [
-"DSC_0038.JPG","DSC_0016.JPG","DSC_1458.JPG",
-"DSC_5939.JPG","DSC_6136.JPG","DSC_6292.JPG",
-"ISH_0300.JPG","ISH_0830.JPG","DSCN1958.JPG","logo.jpg"
-];
+const images = document.querySelectorAll(".gallery img");
+const lightbox = document.getElementById("lightbox");
+const lightboxImg = document.getElementById("lightbox-img");
 
-let index = 0;
+images.forEach(img => {
+  img.addEventListener("click", () => {
+    lightbox.classList.add("active");
+    lightboxImg.src = img.src;
+  });
+});
 
-function next(){
-    index = (index+1)%slides.length;
-    document.getElementById("slide").src = slides[index];
-}
-
-function prev(){
-    index = (index-1+slides.length)%slides.length;
-    document.getElementById("slide").src = slides[index];
-}
-
-setInterval(next,3000);
-
-function openImg(src){
-    document.getElementById("lightbox").style.display="flex";
-    document.getElementById("lightbox-img").src=src;
-}
-
-function closeImg(){
-    document.getElementById("lightbox").style.display="none";
-}
+lightbox.addEventListener("click", () => {
+  lightbox.classList.remove("active");
+});
 </script>
 
 </body>
