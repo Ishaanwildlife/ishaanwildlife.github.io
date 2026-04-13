@@ -6,7 +6,6 @@
 <title>Ishaan Wildlife</title>
 
 <style>
-
 /* RESET */
 *{
     margin:0;
@@ -15,28 +14,7 @@
     font-family:'Segoe UI', sans-serif;
 }
 
-/* LOADER */
-.loader{
-    position:fixed;
-    width:100%;
-    height:100%;
-    background:black;
-    display:flex;
-    justify-content:center;
-    align-items:center;
-    color:white;
-    font-size:30px;
-    letter-spacing:5px;
-    z-index:9999;
-    animation:fadeOut 2s forwards;
-    animation-delay:2s;
-}
-
-@keyframes fadeOut{
-    to{opacity:0; visibility:hidden;}
-}
-
-/* VIDEO */
+/* VIDEO BACKGROUND */
 #bg-video{
     position:fixed;
     top:0;
@@ -45,43 +23,54 @@
     height:100%;
     object-fit:cover;
     z-index:-2;
-    opacity:0;
-    animation:videoFade 3s forwards;
-    animation-delay:2s;
 }
 
-@keyframes videoFade{
-    to{opacity:1;}
-}
-
-/* OVERLAY */
+/* LIGHTER OVERLAY (IMPORTANT FIX) */
 .overlay{
     position:fixed;
+    top:0;
+    left:0;
     width:100%;
     height:100%;
-    background:rgba(0,0,0,0.6);
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.4),   /* lighter */
+        rgba(0,0,0,0.6)
+    );
     z-index:-1;
 }
 
-/* NAV */
+/* NAVBAR */
 nav{
     position:fixed;
     width:100%;
-    padding:20px 50px;
     display:flex;
     justify-content:space-between;
+    padding:20px 50px;
     color:white;
     z-index:10;
 }
 
-nav ul{
-    display:flex;
-    gap:30px;
-    list-style:none;
+nav h1{
+    font-size:28px;
+    letter-spacing:2px;
 }
 
-nav ul li{
-    cursor:pointer;
+nav ul{
+    display:flex;
+    list-style:none;
+    gap:30px;
+}
+
+nav a{
+    color:white;
+    text-decoration:none;
+    font-weight:500;
+    transition:0.3s;
+}
+
+nav a:hover{
+    color:gold;
 }
 
 /* HERO */
@@ -95,64 +84,55 @@ nav ul li{
     text-align:center;
 }
 
-.hero h2{
+/* CINEMATIC TEXT ANIMATION */
+.hero h1{
     font-size:70px;
-    letter-spacing:6px;
-    animation:slideUp 2s ease;
+    letter-spacing:5px;
+    animation:fadeUp 1.5s ease forwards;
 }
 
 .hero p{
-    margin-top:15px;
+    margin-top:10px;
+    font-size:18px;
     opacity:0.8;
-}
-
-@keyframes slideUp{
-    from{transform:translateY(50px); opacity:0;}
-    to{transform:translateY(0); opacity:1;}
+    animation:fadeUp 2s ease forwards;
 }
 
 /* BUTTON */
-.hero button{
-    margin-top:30px;
+.btn{
+    margin-top:20px;
     padding:12px 30px;
-    background:#ffcc00;
+    background:gold;
+    color:black;
     border:none;
     cursor:pointer;
+    font-weight:bold;
     transition:0.3s;
+    animation:fadeUp 2.5s ease forwards;
 }
 
-.hero button:hover{
+.btn:hover{
     transform:scale(1.1);
 }
 
-/* GALLERY */
-.gallery{
-    padding:100px 40px;
-    display:grid;
-    grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
-    gap:20px;
+/* ANIMATION */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(50px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
 }
 
-.gallery img{
-    width:100%;
-    border-radius:10px;
-    transition:0.5s;
-}
-
-.gallery img:hover{
-    transform:scale(1.1);
-}
-
-/* ABOUT */
-.about{
-    padding:100px 40px;
-    text-align:center;
+/* SCROLL SECTION */
+.section{
+    padding:100px 50px;
+    background:black;
     color:white;
-}
-
-.about p{
-    max-width:700px;
-    margin:auto;
+    text-align:center;
 }
 
 </style>
@@ -160,70 +140,39 @@ nav ul li{
 
 <body>
 
-<!-- 🔥 LOADER -->
-<div class="loader">ISHAAN</div>
-
-<!-- 🎥 VIDEO -->
+<!-- VIDEO -->
 <video autoplay muted loop playsinline id="bg-video">
     <source src="wildlife.mp4" type="video/mp4">
 </video>
 
+<!-- OVERLAY -->
 <div class="overlay"></div>
 
 <!-- NAV -->
 <nav>
     <h1>ISHAAN</h1>
     <ul>
-        <li onclick="scrollToSection('gallery')">Gallery</li>
-        <li onclick="scrollToSection('about')">About</li>
+        <li><a href="#">Home</a></li>
+        <li><a href="#">Gallery</a></li>
+        <li><a href="#">About</a></li>
     </ul>
 </nav>
 
 <!-- HERO -->
 <section class="hero">
-    <h2>WILDLIFE</h2>
-    <p>Capture. Explore. Inspire.</p>
-    <button onclick="playSound(); scrollToSection('gallery')">Enter</button>
+    <h1>WILDLIFE</h1>
+    <p>Capturing Nature Through My Lens</p>
+    <button class="btn">Explore</button>
 </section>
 
-<!-- GALLERY -->
-<section class="gallery" id="gallery">
-    <img src="DSC_0016.JPG">
-    <img src="DSC_0038.JPG">
-    <img src="DSC_1458.JPG">
-    <img src="DSC_5775.JPG">
-</section>
-
-<!-- ABOUT -->
-<section class="about" id="about">
+<!-- EXTRA SECTION -->
+<section class="section">
     <h2>About Me</h2>
-    <p>I am Ishaan, capturing the wild through my lens.</p>
+    <p>
+        I am a wildlife photographer capturing rare and beautiful moments of nature.
+        My journey started with passion and is now turning into something powerful.
+    </p>
 </section>
-
-<!-- 🔊 SOUND -->
-<audio id="clickSound">
-    <source src="https://www.soundjay.com/buttons/sounds/button-16.mp3">
-</audio>
-
-<!-- JS -->
-<script>
-
-function scrollToSection(id){
-    document.getElementById(id).scrollIntoView({behavior:'smooth'});
-}
-
-/* SOUND */
-function playSound(){
-    document.getElementById("clickSound").play();
-}
-
-/* AUTOPLAY FIX */
-const video = document.getElementById("bg-video");
-video.play().catch(() => {
-    document.body.addEventListener("click", () => video.play());
-});
-
-</script>
 
 </body>
 </html>
