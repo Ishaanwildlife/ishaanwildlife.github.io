@@ -3,255 +3,204 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
 <title>Ishaan Wildlife</title>
 
-<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600&family=Poppins:wght@300&display=swap" rel="stylesheet">
-
 <style>
-*{margin:0;padding:0;box-sizing:border-box;}
-
-body{
-  background:#000;
-  color:white;
-  font-family:'Poppins',sans-serif;
-  overflow-x:hidden;
+/* RESET */
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family: 'Segoe UI', sans-serif;
 }
 
-/* HERO */
+/* VIDEO BACKGROUND */
+#bg-video{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    z-index:-2;
+}
+
+/* DARK CINEMATIC OVERLAY */
+.overlay{
+    position:fixed;
+    top:0;
+    left:0;
+    width:100%;
+    height:100%;
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.8),
+        rgba(0,0,0,0.4),
+        rgba(0,0,0,0.9)
+    );
+    z-index:-1;
+}
+
+/* NAVBAR */
+nav{
+    position:fixed;
+    width:100%;
+    padding:20px 50px;
+    display:flex;
+    justify-content:space-between;
+    align-items:center;
+    color:white;
+    z-index:10;
+}
+
+nav h1{
+    font-size:24px;
+    letter-spacing:2px;
+}
+
+nav ul{
+    display:flex;
+    gap:30px;
+    list-style:none;
+}
+
+nav ul li{
+    cursor:pointer;
+    transition:0.3s;
+}
+
+nav ul li:hover{
+    color:#ffcc00;
+}
+
+/* HERO SECTION */
 .hero{
-  position:relative;
-  height:100vh;
-  overflow:hidden;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    text-align:center;
+    color:white;
+    animation:fadeIn 2s ease-in;
 }
 
-/* VIDEO */
-.hero video{
-  position:absolute;
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  animation: zoom 20s infinite alternate;
+.hero h2{
+    font-size:60px;
+    letter-spacing:4px;
+    text-shadow:0 0 20px rgba(255,255,255,0.5);
 }
 
-@keyframes zoom{
-  from{transform:scale(1);}
-  to{transform:scale(1.1);}
+.hero p{
+    margin-top:20px;
+    font-size:18px;
+    opacity:0.8;
 }
 
-/* OVERLAY */
-.hero::after{
-  content:"";
-  position:absolute;
-  width:100%;
-  height:100%;
-  background:linear-gradient(to bottom, rgba(0,0,0,0.6), black);
+.hero button{
+    margin-top:30px;
+    padding:12px 30px;
+    border:none;
+    background:#ffcc00;
+    color:black;
+    font-weight:bold;
+    cursor:pointer;
+    transition:0.3s;
 }
 
-/* TEXT */
-.hero-content{
-  position:relative;
-  z-index:2;
-  text-align:center;
-  top:45%;
-  transform:translateY(-50%);
-}
-
-.hero h1{
-  font-size:4.5rem;
-  font-family:'Playfair Display',serif;
-  letter-spacing:4px;
-}
-
-/* TYPING EFFECT */
-.typing{
-  border-right:2px solid white;
-  white-space:nowrap;
-  overflow:hidden;
-  width:0;
-  animation:typing 3s steps(30,end) forwards, blink .7s infinite;
-}
-
-@keyframes typing{
-  to{width:100%;}
-}
-@keyframes blink{
-  50%{border-color:transparent;}
-}
-
-/* BUTTON */
-.sound-btn{
-  position:absolute;
-  bottom:20px;
-  right:20px;
-  background:rgba(255,255,255,0.2);
-  border:none;
-  padding:10px 15px;
-  color:white;
-  border-radius:10px;
-  cursor:pointer;
-}
-
-/* SECTION */
-.section-title{
-  text-align:center;
-  margin:80px 0 30px;
-  font-size:2.2rem;
-  color:#f5c542;
+.hero button:hover{
+    transform:scale(1.1);
 }
 
 /* GALLERY */
 .gallery{
-  display:grid;
-  grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
-  gap:20px;
-  padding:20px;
+    padding:100px 50px;
+    display:grid;
+    grid-template-columns:repeat(auto-fit,minmax(300px,1fr));
+    gap:20px;
 }
 
 .gallery img{
-  width:100%;
-  height:300px;
-  object-fit:cover;
-  border-radius:15px;
-  transition:0.6s;
+    width:100%;
+    border-radius:10px;
+    transition:0.4s;
 }
 
 .gallery img:hover{
-  transform:scale(1.1);
-  box-shadow:0 0 50px rgba(255,255,255,0.3);
-}
-
-/* LIGHTBOX */
-.lightbox{
-  position:fixed;
-  top:0;
-  left:0;
-  width:100%;
-  height:100%;
-  background:rgba(0,0,0,0.95);
-  display:none;
-  align-items:center;
-  justify-content:center;
-}
-
-.lightbox img{
-  max-width:90%;
-  max-height:90%;
-}
-
-.lightbox.active{display:flex;}
-
-/* SCROLL ANIMATION */
-.hidden{
-  opacity:0;
-  transform:translateY(50px);
-  transition:1s;
-}
-
-.show{
-  opacity:1;
-  transform:translateY(0);
+    transform:scale(1.05);
 }
 
 /* ABOUT */
 .about{
-  max-width:800px;
-  margin:auto;
-  padding:60px 20px;
-  text-align:center;
-  line-height:1.8;
+    padding:100px 50px;
+    color:white;
+    text-align:center;
 }
 
-/* FOOTER */
-footer{
-  text-align:center;
-  padding:30px;
-  opacity:0.6;
+.about h2{
+    font-size:40px;
+    margin-bottom:20px;
 }
+
+/* ANIMATIONS */
+@keyframes fadeIn{
+    from{opacity:0; transform:translateY(30px);}
+    to{opacity:1; transform:translateY(0);}
+}
+
 </style>
 </head>
 
 <body>
 
+<!-- VIDEO BACKGROUND -->
+<video autoplay muted loop playsinline id="bg-video">
+    <source src="wildlife.mp4" type="video/mp4">
+</video>
+
+<!-- OVERLAY -->
+<div class="overlay"></div>
+
+<!-- NAVBAR -->
+<nav>
+    <h1>ISHAAN</h1>
+    <ul>
+        <li>Home</li>
+        <li>Gallery</li>
+        <li>About</li>
+    </ul>
+</nav>
+
 <!-- HERO -->
 <section class="hero">
-  <video autoplay muted loop playsinline id="video">
-    <source src="wildlife.mp4" type="video/mp4">
-  </video>
-
-  <div class="hero-content">
-    <h1 class="typing">Ishaan Wildlife</h1>
-    <p>Cinematic Nature Stories</p>
-  </div>
-
-  <button class="sound-btn" onclick="toggleSound()">🔊</button>
+    <h2>WILDLIFE PHOTOGRAPHY</h2>
+    <p>Capturing nature through my lens</p>
+    <button onclick="scrollToGallery()">Explore</button>
 </section>
 
 <!-- GALLERY -->
-<h2 class="section-title hidden">My Work</h2>
-
-<div class="gallery">
-  <img src="DSCN1948.JPG">
-  <img src="DSC_0016.JPG">
-  <img src="DSC_0038.JPG">
-  <img src="DSC_1458.JPG">
-  <img src="DSC_5775.JPG">
-  <img src="DSC_5939.JPG">
-  <img src="DSC_6136.JPG">
-  <img src="DSC_6292.JPG">
-  <img src="ISH_0300.JPG">
-  <img src="ISH_0830.JPG">
-</div>
-
-<!-- LIGHTBOX -->
-<div class="lightbox" id="lightbox">
-  <img id="lightbox-img">
-</div>
-
-<!-- ABOUT -->
-<section class="about hidden">
-  <h2 class="section-title">About Me</h2>
-  <p>
-    I am Ishaan, a wildlife photographer capturing cinematic moments in nature.
-    Every frame tells a story of life, survival, and beauty.
-  </p>
+<section class="gallery" id="gallery">
+    <img src="DSC_0016.JPG">
+    <img src="DSC_0038.JPG">
+    <img src="DSC_1458.JPG">
+    <img src="DSC_5775.JPG">
+    <img src="ISH_0300.JPG">
+    <img src="ISH_0830.JPG">
 </section>
 
-<footer>
-  © 2026 Ishaan Wildlife
-</footer>
+<!-- ABOUT -->
+<section class="about">
+    <h2>About Me</h2>
+    <p>
+        I am Ishaan, a passionate wildlife photographer capturing rare and powerful moments from nature.
+        My goal is to bring people closer to wildlife through my lens.
+    </p>
+</section>
 
 <script>
-/* LIGHTBOX */
-const imgs=document.querySelectorAll(".gallery img");
-const lightbox=document.getElementById("lightbox");
-const lightboxImg=document.getElementById("lightbox-img");
-
-imgs.forEach(img=>{
-  img.onclick=()=>{
-    lightbox.classList.add("active");
-    lightboxImg.src=img.src;
-  }
-});
-
-lightbox.onclick=()=>lightbox.classList.remove("active");
-
-/* SOUND */
-const vid=document.getElementById("video");
-function toggleSound(){
-  vid.muted=!vid.muted;
+function scrollToGallery(){
+    document.getElementById("gallery").scrollIntoView({behavior:"smooth"});
 }
-
-/* SCROLL ANIMATION */
-const observer=new IntersectionObserver(entries=>{
-  entries.forEach(entry=>{
-    if(entry.isIntersecting){
-      entry.target.classList.add("show");
-    }
-  });
-});
-
-document.querySelectorAll(".hidden").forEach(el=>observer.observe(el));
 </script>
 
 </body>
