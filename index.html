@@ -11,7 +11,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family:'Segoe UI', sans-serif;
+    font-family: 'Segoe UI', sans-serif;
 }
 
 /* VIDEO BACKGROUND */
@@ -25,18 +25,14 @@
     z-index:-2;
 }
 
-/* LIGHTER OVERLAY (IMPORTANT FIX) */
+/* CINEMATIC OVERLAY */
 .overlay{
     position:fixed;
     top:0;
     left:0;
     width:100%;
     height:100%;
-    background:linear-gradient(
-        to bottom,
-        rgba(0,0,0,0.4),   /* lighter */
-        rgba(0,0,0,0.6)
-    );
+    background: radial-gradient(circle at center, rgba(0,0,0,0.2), rgba(0,0,0,0.85));
     z-index:-1;
 }
 
@@ -46,31 +42,42 @@ nav{
     width:100%;
     display:flex;
     justify-content:space-between;
-    padding:20px 50px;
+    padding:25px 60px;
     color:white;
-    z-index:10;
+    z-index:100;
 }
 
 nav h1{
     font-size:28px;
-    letter-spacing:2px;
+    letter-spacing:3px;
 }
 
 nav ul{
     display:flex;
+    gap:40px;
     list-style:none;
-    gap:30px;
 }
 
 nav a{
     color:white;
     text-decoration:none;
     font-weight:500;
+    position:relative;
+}
+
+nav a::after{
+    content:'';
+    position:absolute;
+    width:0;
+    height:2px;
+    background:gold;
+    left:0;
+    bottom:-5px;
     transition:0.3s;
 }
 
-nav a:hover{
-    color:gold;
+nav a:hover::after{
+    width:100%;
 }
 
 /* HERO */
@@ -84,42 +91,91 @@ nav a:hover{
     text-align:center;
 }
 
-/* CINEMATIC TEXT ANIMATION */
+/* TITLE */
 .hero h1{
-    font-size:70px;
-    letter-spacing:5px;
+    font-size:80px;
+    letter-spacing:6px;
     animation:fadeUp 1.5s ease forwards;
 }
 
+/* SUBTITLE */
 .hero p{
-    margin-top:10px;
-    font-size:18px;
-    opacity:0.8;
+    margin-top:15px;
+    font-size:20px;
+    opacity:0.85;
     animation:fadeUp 2s ease forwards;
 }
 
 /* BUTTON */
 .btn{
-    margin-top:20px;
-    padding:12px 30px;
+    margin-top:30px;
+    padding:14px 35px;
     background:gold;
-    color:black;
     border:none;
-    cursor:pointer;
     font-weight:bold;
-    transition:0.3s;
+    cursor:pointer;
+    transition:0.4s;
     animation:fadeUp 2.5s ease forwards;
 }
 
 .btn:hover{
     transform:scale(1.1);
+    background:white;
 }
 
-/* ANIMATION */
+/* SCROLL DOWN INDICATOR */
+.scroll{
+    position:absolute;
+    bottom:30px;
+    color:white;
+    font-size:14px;
+    animation:float 2s infinite;
+}
+
+/* ABOUT */
+.section{
+    padding:120px 60px;
+    background:black;
+    color:white;
+    text-align:center;
+}
+
+.section h2{
+    font-size:40px;
+    margin-bottom:20px;
+}
+
+.section p{
+    max-width:800px;
+    margin:auto;
+    line-height:1.6;
+    opacity:0.85;
+}
+
+/* GALLERY */
+.gallery{
+    display:grid;
+    grid-template-columns:repeat(auto-fit, minmax(250px,1fr));
+    gap:15px;
+    margin-top:40px;
+}
+
+.gallery img{
+    width:100%;
+    height:250px;
+    object-fit:cover;
+    transition:0.5s;
+}
+
+.gallery img:hover{
+    transform:scale(1.1);
+}
+
+/* ANIMATIONS */
 @keyframes fadeUp{
     from{
         opacity:0;
-        transform:translateY(50px);
+        transform:translateY(60px);
     }
     to{
         opacity:1;
@@ -127,12 +183,9 @@ nav a:hover{
     }
 }
 
-/* SCROLL SECTION */
-.section{
-    padding:100px 50px;
-    background:black;
-    color:white;
-    text-align:center;
+@keyframes float{
+    0%,100%{transform:translateY(0);}
+    50%{transform:translateY(10px);}
 }
 
 </style>
@@ -140,7 +193,7 @@ nav a:hover{
 
 <body>
 
-<!-- VIDEO -->
+<!-- VIDEO BACKGROUND -->
 <video autoplay muted loop playsinline id="bg-video">
     <source src="wildlife.mp4" type="video/mp4">
 </video>
@@ -148,13 +201,13 @@ nav a:hover{
 <!-- OVERLAY -->
 <div class="overlay"></div>
 
-<!-- NAV -->
+<!-- NAVBAR -->
 <nav>
     <h1>ISHAAN</h1>
     <ul>
         <li><a href="#">Home</a></li>
-        <li><a href="#">Gallery</a></li>
-        <li><a href="#">About</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#about">About</a></li>
     </ul>
 </nav>
 
@@ -162,17 +215,41 @@ nav a:hover{
 <section class="hero">
     <h1>WILDLIFE</h1>
     <p>Capturing Nature Through My Lens</p>
-    <button class="btn">Explore</button>
+    <button class="btn" onclick="scrollToGallery()">Explore</button>
+    <div class="scroll">↓ Scroll</div>
 </section>
 
-<!-- EXTRA SECTION -->
-<section class="section">
+<!-- ABOUT -->
+<section class="section" id="about">
     <h2>About Me</h2>
     <p>
-        I am a wildlife photographer capturing rare and beautiful moments of nature.
-        My journey started with passion and is now turning into something powerful.
+        I am a passionate wildlife photographer capturing rare and breathtaking moments of nature.
+        From silent forests to vibrant wetlands, every frame tells a story.
+        My journey began with curiosity and is now evolving into a powerful vision to showcase the beauty of wildlife.
     </p>
 </section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+    <h2>My Work</h2>
+
+    <div class="gallery">
+        <img src="1000523306.jpg">
+        <img src="DSCN1948.JPG">
+        <img src="DSC_0016.JPG">
+        <img src="DSC_0038.JPG">
+        <img src="DSC_1458.JPG">
+        <img src="ISH_0300.JPG">
+    </div>
+</section>
+
+<script>
+function scrollToGallery(){
+    document.getElementById("gallery").scrollIntoView({
+        behavior:"smooth"
+    });
+}
+</script>
 
 </body>
 </html>
