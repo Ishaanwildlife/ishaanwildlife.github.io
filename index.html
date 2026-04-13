@@ -12,7 +12,7 @@
     margin:0;
     padding:0;
     box-sizing:border-box;
-    font-family: 'Segoe UI', sans-serif;
+    font-family:'Segoe UI', sans-serif;
 }
 
 /* VIDEO BACKGROUND */
@@ -24,6 +24,7 @@
     height:100%;
     object-fit:cover;
     z-index:-2;
+    filter:brightness(0.7);
 }
 
 /* OVERLAY */
@@ -49,6 +50,7 @@ nav{
     padding:20px 50px;
     display:flex;
     justify-content:space-between;
+    align-items:center;
     color:white;
     z-index:10;
 }
@@ -79,8 +81,8 @@ nav ul li:hover{
     flex-direction:column;
     justify-content:center;
     align-items:center;
-    color:white;
     text-align:center;
+    color:white;
     animation:fadeIn 2s ease;
 }
 
@@ -130,13 +132,21 @@ nav ul li:hover{
 /* ABOUT */
 .about{
     padding:100px 40px;
-    color:white;
     text-align:center;
+    color:white;
 }
 
 .about h2{
     font-size:40px;
     margin-bottom:20px;
+}
+
+.about p{
+    max-width:700px;
+    margin:auto;
+    line-height:1.7;
+    font-size:18px;
+    opacity:0.9;
 }
 
 /* ANIMATION */
@@ -150,17 +160,17 @@ nav ul li:hover{
 
 <body>
 
-<!-- VIDEO -->
-<video autoplay muted loop playsinline id="bg-video">
+<!-- 🎥 VIDEO BACKGROUND (CORRECT PLACE) -->
+<video autoplay muted loop playsinline preload="none" id="bg-video">
     <source src="wildlife.mp4" type="video/mp4">
 </video>
 
-<!-- OVERLAY -->
+<!-- 🌑 OVERLAY -->
 <div class="overlay"></div>
 
 <!-- NAVBAR -->
 <nav>
-    <h1>Ishaan Kumavat</h1>
+    <h1>ISHAAN</h1>
     <ul>
         <li onclick="scrollToSection('home')">Home</li>
         <li onclick="scrollToSection('gallery')">Gallery</li>
@@ -177,33 +187,26 @@ nav ul li:hover{
 
 <!-- GALLERY -->
 <section class="gallery" id="gallery">
-    <img src="DSC_0016.JPG">
-    <img src="DSC_0038.JPG">
-    <img src="DSC_1458.JPG">
-    <img src="DSC_5775.JPG">
-    <img src="ISH_0300.JPG">
-    <img src="ISH_0830.JPG">
+    <img src="DSC_0016.JPG" loading="lazy">
+    <img src="DSC_0038.JPG" loading="lazy">
+    <img src="DSC_1458.JPG" loading="lazy">
+    <img src="DSC_5775.JPG" loading="lazy">
+    <img src="ISH_0300.JPG" loading="lazy">
+    <img src="ISH_0830.JPG" loading="lazy">
 </section>
 
 <!-- ABOUT -->
 <section class="about" id="about">
     <h2>About Me</h2>
-   <p>
-I am Ishaan, a passionate wildlife photographer capturing the untamed beauty of nature. 
-From the stillness of wetlands to the chaos of flight, I chase moments that most people never see.
-
-Photography, for me, is not just about images — it is about storytelling. 
-Every frame holds emotion, movement, and life. My work reflects patience, precision, 
-and a deep respect for wildlife.
-
-Through my lens, I aim to bring people closer to nature and inspire them to protect it.
-</p>
+    <p>
+        I am Ishaan, a wildlife photographer driven by passion and curiosity for the natural world. 
+        Through my lens, I capture moments that often go unnoticed — the silent flight of birds, 
+        the intensity of survival, and the raw beauty of nature.
+    </p>
 </section>
 
 <!-- JS -->
 <script>
-
-/* SCROLL */
 function scrollToSection(id){
     document.getElementById(id).scrollIntoView({behavior:'smooth'});
 }
@@ -216,7 +219,6 @@ video.play().catch(() => {
         video.play();
     });
 });
-
 </script>
 
 </body>
